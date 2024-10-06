@@ -1,9 +1,6 @@
-// import 'dart:ffi';
-
 import 'package:cp/providers/date_provider.dart';
 import 'package:cp/providers/location_provider.dart';
 import 'package:cp/providers/radio_provider.dart';
-import 'package:cp/providers/swaptext_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'menu_lateral.dart';
@@ -46,7 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final radioProvider = Provider.of<RadioProvider>(context);
     final dateProvider = Provider.of<DateProvider>(context);
-    final swapTextProvider = Provider.of<SwapTextProvider>(context);
     final locationProvider = Provider.of<LocationProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -242,8 +238,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: (swapTextProvider.fromText.isNotEmpty &&
-                        swapTextProvider.toText.isNotEmpty)
+                onPressed: (locationProvider.arrivalLocation != null &&
+                        locationProvider.departureLocation != null)
                     ? () {
                         Navigator.push(
                           context,
