@@ -1,6 +1,6 @@
 import 'package:cp/providers/date_provider.dart';
+import 'package:cp/providers/location_provider.dart';
 import 'package:cp/providers/radio_provider.dart';
-import 'package:cp/providers/swaptext_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pagina_inicial.dart';
@@ -11,7 +11,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => RadioProvider()),
         ChangeNotifierProvider(create: (_) => DateProvider()),
-        ChangeNotifierProvider(create: (_) => SwapTextProvider()),
+        ChangeNotifierProvider(create: (_) => LocationProvider()),
       ],
       child: MyApp(),
     ),

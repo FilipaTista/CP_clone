@@ -1,6 +1,6 @@
 import 'package:cp/providers/date_provider.dart';
+import 'package:cp/providers/location_provider.dart';
 import 'package:cp/providers/radio_provider.dart';
-import 'package:cp/providers/swaptext_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'menu_lateral.dart';
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final radioProvider = Provider.of<RadioProvider>(context);
     final dateProvider = Provider.of<DateProvider>(context);
-    final swapTextProvider = Provider.of<SwapTextProvider>(context);
+    final locationProvider = Provider.of<LocationProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -93,9 +93,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _buildRadioTile('Ida', 'option1', radioProvider),
+                Container(
+                    padding: EdgeInsets.only(left: 15),
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child: _buildRadioTile('Ida', 'option1', radioProvider)),
                 const SizedBox(width: 16),
-                _buildRadioTile('Ida e Volta', 'option2', radioProvider),
+                Container(
+                    padding: EdgeInsets.only(left: 15),
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child: _buildRadioTile(
+                        'Ida e Volta', 'option2', radioProvider)),
               ],
             ),
             Divider(
@@ -108,47 +115,53 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.fromLTRB(15, 8, 3, 8),
                   child: IconButton(
                     icon: Icon(Icons.swap_vertical_circle_outlined),
-                    onPressed: swapTextProvider.swapText,
+                    onPressed: () {
+                      String? temp = locationProvider.arrivalLocation;
+                      locationProvider
+                          .updateArrival(locationProvider.departureLocation);
+                      locationProvider.updateDeparture(temp);
+                    },
                     iconSize: 45,
                   ),
                 ),
                 Expanded(
                   child: Column(
                     children: [
-                      TextField(
-                        controller: TextEditingController(
-                            text: swapTextProvider.fromText)
-                          ..selection = TextSelection.fromPosition(
-                            TextPosition(
-                                offset: swapTextProvider.fromText.length),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DropdownMenu(
+                            locationProvider: locationProvider,
+                            departure: true,
+                            hint: "De onde?",
                           ),
-                        onChanged: (value) {
-                          swapTextProvider.updateFromText(value);
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'De onde?',
-                          border: InputBorder.none,
-                        ),
+                          IconButton(
+                              onPressed: () => print("Location selector"),
+                              icon: Icon(
+                                Icons.location_pin,
+                                size: 38,
+                              ))
+                        ],
                       ),
                       Divider(
                         color: Colors.grey,
                         thickness: 1,
                         endIndent: 15,
                       ),
-                      TextField(
-                        controller:
-                            TextEditingController(text: swapTextProvider.toText)
-                              ..selection = TextSelection.fromPosition(
-                                TextPosition(
-                                    offset: swapTextProvider.toText.length),
-                              ),
-                        onChanged: (value) {
-                          swapTextProvider.updateToText(value);
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Para onde?',
-                          border: InputBorder.none,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DropdownMenu(
+                              locationProvider: locationProvider,
+                              departure: false,
+                              hint: "Para onde?"),
+                          IconButton(
+                              onPressed: () => print("Location selector"),
+                              icon: Icon(
+                                Icons.location_pin,
+                                size: 38,
+                              ))
+                        ],
                       ),
                     ],
                   ),
@@ -225,8 +238,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: (swapTextProvider.fromText.isNotEmpty &&
-                        swapTextProvider.toText.isNotEmpty)
+                onPressed: (locationProvider.arrivalLocation != null &&
+                        locationProvider.departureLocation != null)
                     ? () {
                         Navigator.push(
                           context,
@@ -267,5 +280,45 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       Text(title),
     ]);
+  }
+}
+
+class DropdownMenu extends StatelessWidget {
+  final LocationProvider locationProvider;
+  final bool departure;
+  final String hint;
+
+  DropdownMenu(
+      {super.key,
+      required this.locationProvider,
+      required this.departure,
+      required this.hint});
+
+  final List<String> stations = ["Aveiro", "Mealhada"];
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      // Display the currently selected item, or hint if none is selected
+      value: departure
+          ? locationProvider.departureLocation
+          : locationProvider.arrivalLocation,
+      hint: Text(hint),
+      underline: SizedBox.shrink(),
+      isExpanded: false,
+      // List of dropdown items
+      items: stations.map((String item) {
+        return DropdownMenuItem<String>(
+          value: item,
+          child: Text(item),
+        );
+      }).toList(),
+      // Called when the user selects an item
+      onChanged: (String? newValue) {
+        departure
+            ? locationProvider.updateDeparture(newValue!)
+            : locationProvider.updateArrival(newValue!);
+      },
+    );
   }
 }

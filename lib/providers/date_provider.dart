@@ -10,6 +10,7 @@ class DateProvider with ChangeNotifier {
 
   void updateDepartureDate(DateTime date) {
     _departureDate = date;
+    firstDate = date;
     notifyListeners();
   }
 
