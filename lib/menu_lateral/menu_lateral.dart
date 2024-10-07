@@ -20,13 +20,14 @@ class MenuLateral extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              //abrir definiçoes
               if (sideMenuProvider.option != 'opt6') {
                 sideMenuProvider.updateOption('opt6');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Settings()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
             child: SizedBox(
@@ -43,9 +44,9 @@ class MenuLateral extends StatelessWidget {
                       child: Text(
                         "FB",
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 18,
                           color: Colors.white,
-                          fontWeight: FontWeight.w200,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -77,13 +78,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Check if not already in page
               if (sideMenuProvider.option != 'opt1') {
                 sideMenuProvider.updateOption('opt1');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -102,13 +104,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt2') {
                 sideMenuProvider.updateOption('opt2');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const NextTrains()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -127,13 +130,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt3') {
                 sideMenuProvider.updateOption('opt3');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -152,13 +156,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt4') {
                 sideMenuProvider.updateOption('opt4');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -177,19 +182,20 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt5') {
                 sideMenuProvider.updateOption('opt5');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
           Divider(
-            color: Colors.grey, // Cor da linha
-            thickness: 1, // Espessura da linha
+            color: Colors.grey,
+            thickness: 1,
           ),
           ListTile(
             leading: Icon(
@@ -206,13 +212,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt6') {
                 sideMenuProvider.updateOption('opt6');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Settings()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -231,13 +238,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de contatos
               if (sideMenuProvider.option != 'opt7') {
                 sideMenuProvider.updateOption('opt7');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -256,13 +264,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt8') {
                 sideMenuProvider.updateOption('opt8');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -281,13 +290,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt9') {
                 sideMenuProvider.updateOption('opt9');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -306,13 +316,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt10') {
                 sideMenuProvider.updateOption('opt10');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),
@@ -331,13 +342,14 @@ class MenuLateral extends StatelessWidget {
                       : Colors.black),
             ),
             onTap: () {
-              // Ação para a página de configurações
               if (sideMenuProvider.option != 'opt11') {
                 sideMenuProvider.updateOption('opt11');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
+              } else {
+                Navigator.pop(context);
               }
             },
           ),

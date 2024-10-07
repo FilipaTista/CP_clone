@@ -13,8 +13,8 @@ class Settings extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
-          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.green),
           toolbarHeight: 40,
         ),
         drawer: MenuLateral(),
@@ -42,9 +42,9 @@ class Settings extends StatelessWidget {
                           child: Text(
                             "FB",
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 18,
                               color: Colors.white,
-                              fontWeight: FontWeight.w200,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),
@@ -58,7 +58,7 @@ class Settings extends StatelessWidget {
                               'Filipa\ncomputacaomovel@ua.pt',
                               style: TextStyle(
                                 color: Color.fromARGB(255, 121, 121, 121),
-                                fontSize: 13,
+                                fontSize: 15,
                               ),
                             ),
                           ],
@@ -236,7 +236,7 @@ class Settings extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Text(
-                "Notificações",
+                "Idioma",
                 style: TextStyle(
                     color: Color.fromARGB(255, 121, 121, 121),
                     fontWeight: FontWeight.bold),

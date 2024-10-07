@@ -238,9 +238,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                         ],
                       )),
-            SizedBox(height: 16),
+            SizedBox(height: 15),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: ElevatedButton(
                 onPressed: (locationProvider.arrivalLocation != null &&
                         locationProvider.departureLocation != null)

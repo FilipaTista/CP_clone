@@ -50,7 +50,7 @@ class NextTrains extends StatelessWidget {
                     'Qual o próximo comboio?',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
