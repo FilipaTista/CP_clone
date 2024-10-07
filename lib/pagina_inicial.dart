@@ -1,9 +1,10 @@
 import 'package:cp/providers/date_provider.dart';
 import 'package:cp/providers/location_provider.dart';
 import 'package:cp/providers/radio_provider.dart';
+import 'package:cp/componentes/dropdown_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'menu_lateral.dart';
+import 'menu_lateral/menu_lateral.dart';
 import 'horarios.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -130,10 +131,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          DropdownMenu(
+                          CustomDropdownMenu(
                             locationProvider: locationProvider,
                             departure: true,
                             hint: "De onde?",
+                            settings: false,
                           ),
                           IconButton(
                               onPressed: () => print("Location selector"),
@@ -151,10 +153,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          DropdownMenu(
-                              locationProvider: locationProvider,
-                              departure: false,
-                              hint: "Para onde?"),
+                          CustomDropdownMenu(
+                            locationProvider: locationProvider,
+                            departure: false,
+                            hint: "Para onde?",
+                            settings: false,
+                          ),
                           IconButton(
                               onPressed: () => print("Location selector"),
                               icon: Icon(
@@ -234,9 +238,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                         ],
                       )),
-            SizedBox(height: 16),
+            SizedBox(height: 15),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: ElevatedButton(
                 onPressed: (locationProvider.arrivalLocation != null &&
                         locationProvider.departureLocation != null)
@@ -255,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Size(MediaQuery.of(context).size.width, 50)),
                   shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),
                   ),
                 ),
@@ -280,45 +284,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       Text(title),
     ]);
-  }
-}
-
-class DropdownMenu extends StatelessWidget {
-  final LocationProvider locationProvider;
-  final bool departure;
-  final String hint;
-
-  DropdownMenu(
-      {super.key,
-      required this.locationProvider,
-      required this.departure,
-      required this.hint});
-
-  final List<String> stations = ["Aveiro", "Mealhada"];
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      // Display the currently selected item, or hint if none is selected
-      value: departure
-          ? locationProvider.departureLocation
-          : locationProvider.arrivalLocation,
-      hint: Text(hint),
-      underline: SizedBox.shrink(),
-      isExpanded: false,
-      // List of dropdown items
-      items: stations.map((String item) {
-        return DropdownMenuItem<String>(
-          value: item,
-          child: Text(item),
-        );
-      }).toList(),
-      // Called when the user selects an item
-      onChanged: (String? newValue) {
-        departure
-            ? locationProvider.updateDeparture(newValue!)
-            : locationProvider.updateArrival(newValue!);
-      },
-    );
   }
 }
